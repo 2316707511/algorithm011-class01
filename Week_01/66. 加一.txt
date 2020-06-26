@@ -1,0 +1,47 @@
+class Solution {
+public:
+	vector<int> plusOne(vector<int>& digits) {
+		/*
+			1、暴力求解
+
+			将传入的数组转化为数字再加1
+
+			因为高位数字在数组低位，所以需要先将低位的数字先缓存在栈中，再存入返回的容器中
+
+			问题 ： 如果传入数组，转化的数字大于INT_MAX则该方法失效
+		*/
+
+		/*
+			2 、 进位 加法器
+
+			直接将最后一位数字 digits[digits.size() - 1] 做++；
+
+			如果进位 
+				当前位置0
+				循环前一位数字再进行++
+			否则
+				return digits
+
+			如果首位产生进位，则在数组头部插入1
+		*/
+
+		for (int i = digits.size() - 1; i >= 0; --i)
+		{
+			++digits[i];
+
+			if (10 == digits[i])
+			{
+				digits[i] = 0;
+				continue;
+			}
+			else
+			{
+				return digits;
+			}
+		}
+
+		digits.insert(digits.begin(), 1);
+
+		return digits;
+	}
+};
